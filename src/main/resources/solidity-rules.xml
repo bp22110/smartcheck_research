@@ -107,7 +107,6 @@
         </Pattern>
     </Patterns>
 </Rule>
-
     <Rule>
         <RuleId>SOLIDITY_BALANCE_EQUALITY</RuleId>
         <Patterns>
@@ -149,6 +148,25 @@
             </Pattern>
         </Patterns>
     </Rule>
+    <Rule>
+    <RuleId>SOLIDITY_REENTRANCY_CEI</RuleId>
+    <Patterns>
+        <!-- Detects external call before state update -->
+        <Pattern patternId="cei-001">
+            <Categories>
+                <Category>Security</Category>
+            </Categories>
+            <Severity>3</Severity>
+            <XPath>
+                //functionDefinition
+                    //expression
+                        [matches(text()[1], "call.value|delegatecall|callcode")]
+                    /following-sibling::expression
+                        [matches(text()[1], "=")]
+            </XPath>
+        </Pattern>
+    </Patterns>
+</Rule>
     <Rule>
         <RuleId>SOLIDITY_CONSTRUCTOR_RETURN</RuleId>
         <Patterns>
