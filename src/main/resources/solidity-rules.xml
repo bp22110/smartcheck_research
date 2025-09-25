@@ -92,6 +92,23 @@
         </Patterns>
     </Rule>
     <Rule>
+    <RuleId>SOLIDITY_LOCK_VARIABLE</RuleId>
+    <Patterns>
+        <Pattern patternId="lock-var-001">
+            <Categories>
+                <Category>Solidity</Category>
+            </Categories>
+            <Severity>2</Severity>
+            <XPath>
+                //stateVariableDeclaration
+                    [typeName//elementaryTypeName[text()="bool"]]
+                    [variableDeclaration/text()="lock"]
+            </XPath>
+        </Pattern>
+    </Patterns>
+</Rule>
+
+    <Rule>
         <RuleId>SOLIDITY_BALANCE_EQUALITY</RuleId>
         <Patterns>
             <!-- Looks for strict balance comparisons: ".balance ==", ".balance !=".  -->
